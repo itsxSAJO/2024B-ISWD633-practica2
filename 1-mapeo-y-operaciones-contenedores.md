@@ -2,11 +2,11 @@
 ### Usando una forma más semántica cuando se especifican puertos
 
 ```
-docker run -d --name <nombre contenedor> --publish published=<valorPuertoHost>,target=<valor> <nombre imagen>:<tag> 
+docker run -d --name Jenkins --publish published=8080,target=50000 jenkins/jenkins:alpine3.18-jdk11
 ```
 ### Publicando todos los puertos
 ```
-docker run -P -d --name <nombre contenedor> <nombre imagen>:<tag> 
+docker run -P -d --name Jenkins2 jenkins/jenkins:alpine3.18-jdk11 
 ```
 
 -P: le indica a Docker que asigne automáticamente puertos aleatorios en tu host para todos los puertos expuestos por el contenedor.
@@ -28,11 +28,20 @@ Para obtener la contraseña solicitada es necesario ingresar al contenedor.
 
 ### Ejecutar un comando en un contenedor de Docker en ejecución
 ```
-docker exec <nombre contenedor> <comando> <argumentos opcionales>
+docker exec Jenkins ls -l
 ```
+
+Este comando ejecuta ls -l dentro del contenedor llamado Jenkins, listando los archivos del directorio actual en el contenedor.
+
 # COMPLETAR
 ### ¿Para qué se usa el comando ls?
+
+El comando ls se utiliza para listar los archivos y directorios en el directorio actual o en un directorio específico que indiquemos. Es una de las herramientas más comunes para inspeccionar el contenido de un sistema de archivos.
+
 ### ¿Para qué sirve el argumento -l junto al comando ls?
+
+El argumento -l muestra esa lista en un formato detallado, incluyendo información como los permisos, el propietario, el tamaño y la fecha de modificación de cada archivo o directorio.
+
 ### Usar el contenedor de jenkins creado previamente y ejecutar el comando ls con el argumento -l
 # COMPLETAR
 # COLOCAR UNA CAPTURA DE PANTALLA
@@ -50,11 +59,11 @@ docker exec -i <nombre contenedor> <programa o comando>
 
 ### Ejecutar una de las siguientes instrucciones
 ```
-docker exec -i <nombre contenedor> /bin/bash 
+docker exec -i Jenkins /bin/bash 
 ```
 ó
 ```
-docker exec -i <nombre contenedor> bash 
+docker exec -i Jenkins bash 
 ```
 **Considerar**
 - /bin/bash: Al especificar la ruta completa del shell, Docker buscará el ejecutable /bin/bash en el sistema de archivos del contenedor y lo ejecutará. Esto es útil cuando quieres asegurarte de que se está utilizando un shell específico que está ubicado en una ubicación conocida en el sistema de archivos del contenedor. 
@@ -80,14 +89,19 @@ Ejecutar un shell interactivo bidireccional en un contenedor de Docker significa
 
 ![Imagen](img/jenkins-it.PNG)
 ```
-docker exec -i-t <nombre contenedor> <programa o comando>
+docker exec -i -t Jenkins /bin/bash
 ```
+
+Para que el comando se ejecute correctamente, los flags -i y -t deben estar separados por un espacio.
+
 ó
 ```
-docker exec -it <nombre contenedor> <programa o comando>
+docker exec -it Jenkins /bin/bash
 ```
 
 ### Ahora puedes acceder al contenedor de jenkins y obtener la contraseña ubicada en /var/jenkins_home/secrets/initialAdminPassword
+
+Para obtener la contraseña inicial de Jenkins, no se puede ejecutar el archivo directamente, porque no es un comando. En lugar de eso, se debe leer el contenido del archivo usando el comando: cat, este comando mostrará la contraseña en la terminal
 
 # COMPLETAR
 
@@ -99,7 +113,7 @@ docker exec -it <nombre contenedor> <programa o comando>
 ### Para ver los logs de un contenedor
 
 ```
-docker logs -n <cantidad de líneas> <nombre o id del contenedor> 
+docker logs -n -t Jenkins
 ```
 -t: para incluir la fecha y la hora
 
