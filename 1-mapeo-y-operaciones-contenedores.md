@@ -4,6 +4,10 @@
 ```
 docker run -d --name Jenkins --publish published=8080,target=50000 jenkins/jenkins:alpine3.18-jdk11
 ```
+
+![Imagen](img/mapeodepuertos1.png)
+
+
 ### Publicando todos los puertos
 ```
 docker run -P -d --name Jenkins2 jenkins/jenkins:alpine3.18-jdk11 
@@ -15,9 +19,11 @@ docker run -P -d --name Jenkins2 jenkins/jenkins:alpine3.18-jdk11
 No puedes mapear puertos a un contenedor existente directamente después de su creación con Docker. El mapeo de puertos debe especificarse en el momento de crear y ejecutar el contenedor.
 
 ### Crear contenedor de Jenkins puertos contenedor: 8080 (interface web) y 50000 (comunicación entre nodos) imagen: jenkins/jenkins:alpine3.18-jdk11
-# COMPLETAR
 
-# COLOCAR UNA CAPTURA DE PANTALLA  DEL ACCESO http://localhost:8080
+# ACCESO http://localhost:8080
+
+![Imagen](img/localHost8080.png)
+
 
 ### ¿Cómo obtener la contraseña solicitada?
 Para obtener la contraseña solicitada es necesario ingresar al contenedor.
@@ -44,7 +50,8 @@ El argumento -l muestra esa lista en un formato detallado, incluyendo informaci�
 
 ### Usar el contenedor de jenkins creado previamente y ejecutar el comando ls con el argumento -l
 # COMPLETAR
-# COLOCAR UNA CAPTURA DE PANTALLA
+
+![Imagen](img/comandoEjecucion.png)
 
 ### Para ejecutar un shell interactivo en un contenedor de Docker especificado.
 El comando **docker exec** te permite acceder a la sesión shell de un contenedor en ejecución, estarás dentro del contenedor y podrás ejecutar comandos como si estuvieras en una terminal normal. 
@@ -61,10 +68,14 @@ docker exec -i <nombre contenedor> <programa o comando>
 ```
 docker exec -i Jenkins /bin/bash 
 ```
+
+
 ó
 ```
 docker exec -i Jenkins bash 
 ```
+![Imagen](img/binbash.png)
+
 **Considerar**
 - /bin/bash: Al especificar la ruta completa del shell, Docker buscará el ejecutable /bin/bash en el sistema de archivos del contenedor y lo ejecutará. Esto es útil cuando quieres asegurarte de que se está utilizando un shell específico que está ubicado en una ubicación conocida en el sistema de archivos del contenedor. 
 - bash: Al especificar solo el nombre del shell, Docker buscará el comando bash en las rutas del sistema (por lo general, en las rutas definidas en la variable de entorno PATH) del contenedor y lo ejecutará. Esto asume que bash está disponible en alguna de las rutas del sistema definidas en el contenedor.
@@ -78,10 +89,13 @@ Ejecutar
 ```
 whoami
 ```
-# COLOCAR UNA CAPTURA DE PANTALLA
 
 **Si se visualiza el mensaje command not found, considerar**
 El problema se debe a que no se ha asignado un terminal de salida al contenedor al ejecutar el comando. Cuando usas docker exec -i jenkins-server /bin/bash en Windows, el comando se ejecuta pero no hay un terminal asignado para mostrar la salida del comando ls.
+
+Para solucionar el problema del carácter de fin de línea (\r), se debe usar una terminal interactiva con el comando docker exec -it Jenkins /bin/bash. Esto permite ejecutar comandos dentro del contenedor uno por uno.
+
+![Imagen](img/comandosBashSolucion.png)
 
 
 ### Para ejecutar un shell interactivo bidireccional en un contenedor de Docker especificado.
@@ -99,9 +113,13 @@ Para que el comando se ejecute correctamente, los flags -i y -t deben estar sepa
 docker exec -it Jenkins /bin/bash
 ```
 
+![Imagen](img/comandosBashIT.png)
+
 ### Ahora puedes acceder al contenedor de jenkins y obtener la contraseña ubicada en /var/jenkins_home/secrets/initialAdminPassword
 
 Para obtener la contraseña inicial de Jenkins, no se puede ejecutar el archivo directamente, porque no es un comando. En lugar de eso, se debe leer el contenido del archivo usando el comando: cat, este comando mostrará la contraseña en la terminal
+
+![Imagen](img/comandoContrasena.png)
 
 # COMPLETAR
 
@@ -109,6 +127,7 @@ Para obtener la contraseña inicial de Jenkins, no se puede ejecutar el archivo 
 
 **Para este punto no es necesario continuar con la instalación de Jenkins**
 
+![Imagen](img/localHost8080contrasena.png)
 
 ### Para ver los logs de un contenedor
 
@@ -116,6 +135,8 @@ Para obtener la contraseña inicial de Jenkins, no se puede ejecutar el archivo 
 docker logs -n -t Jenkins
 ```
 -t: para incluir la fecha y la hora
+
+![Imagen](img/jenkinsLog.png)
 
 
 
