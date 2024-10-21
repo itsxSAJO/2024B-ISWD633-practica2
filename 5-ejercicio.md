@@ -58,6 +58,8 @@ recordar que a es el puerto que usó para el mapeo con wordpress
 ### ¿Qué ha sucedido, qué puede observar?
 # COMPLETAR
 
+La página en blanco que estás viendo probablemente se debe a una discrepancia en la configuración entre WordPress y MySQL, específicamente en las variables de entorno como WORDPRESS_DB_HOST, WORDPRESS_DB_USER, WORDPRESS_DB_PASSWORD, y WORDPRESS_DB_NAME. Dado que en la configuración de WordPress estás intentando conectarte a una base de datos y un usuario que no coinciden con los definidos en MySQL, WordPress no puede acceder correctamente a la base de datos. 
+
 
 
 
