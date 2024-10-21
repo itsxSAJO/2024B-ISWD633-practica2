@@ -1,3 +1,3 @@
-# COMPLETAR  
-Comparando sus conocimientos antes de hacer la práctica con sus conocimientos después de hacer la tarea, explicar los principales aprendizajes logrados para beneficio de su formación profesional.  
-Si solucionó un problema presentado al realizar la práctica también se debe documentar.
+En esta práctica, aprendí a manejar Docker de manera más eficiente. Antes tenía una comprensión teórica, pero ahora sé cómo mapear puertos correctamente, ejecutar comandos dentro de contenedores y usar variables de entorno para configurar aplicaciones. También aprendí a crear redes personalizadas y gestionar configuraciones con archivos .env, lo que hace las aplicaciones más portátiles.
+
+Tuve que solucionar un problema con la ejecución de comandos interactivos en los contenedores, y al entender mejor los flags -i -t, pude resolverlo. Esta práctica me ayudó a aplicar la teoría en situaciones reales y mejorar mis habilidades en Docker.
